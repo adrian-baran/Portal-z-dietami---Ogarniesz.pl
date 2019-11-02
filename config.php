@@ -1,9 +1,9 @@
 <?php
 //tablica konfiguracyjna bazy danych
 $config['db_server'] = 'localhost';
-$config['db_username'] = '00268814_ogarniesz';
-$config['db_password'] = 'Qazqaz1212!';
-$config['db_name'] = '00268814_ogarniesz';
+$config['db_username'] = 'user';
+$config['db_password'] = 'pass';
+$config['db_name'] = 'dbname';
 
 //połączenie z bazą
 $connect = @mysql_connect($config['db_server'], $config['db_username'],$config['db_password']);
