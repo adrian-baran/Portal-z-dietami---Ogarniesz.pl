@@ -4,6 +4,7 @@ session_start();
 require 'header.php'; 
 require 'config.php'; 
 require_once 'user.class.php';
+require_once 'mybody.class.php';
 
 //jeżeli ktoś nie jest zalogowany
 if (!user::isLogged()) {
@@ -31,6 +32,26 @@ else {
 
     echo '<b>Nick:</b> '.$profile['login'].'<br />';
     echo '<b>Email:</b> '.$profile['email'].'<br />';
+	//dane obliczone dzięki klasie mybody.class.php
+	//identyfikacja płci
+	if (!$profile['plec'] > 0) {
+		$plec = false; //kobieta
+	} else {
+		$plec = true;
+	}
+	//zapotrzebowanie kaloryczne
+	
+	$zapotrzebowanie = mybody::ileKcal($plec,$profile['waga'],$profile['wzrost'],$profile['wiek'],$profile['tryb']);
+	echo '<b>Zapotrzebowanie kaloryczne:</b> '.$zapotrzebowanie. ' kcal <br />';
+	
+	//bmi
+	$bmi = mybody::getBmi ($profile['waga'],$profile['wzrost']);
+	echo '<b>Twoje BMI:</b> '.$bmi.' <br />';
+	
+	//Co oznacza wynik bmi
+	$checkBmi = mybody::checkBmi($bmi);
+	echo '<b>'.$checkBmi.'</b> <br />';
+	
 	
 
 }
