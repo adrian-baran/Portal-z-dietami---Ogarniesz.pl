@@ -21,13 +21,9 @@ else {
     // jezeli nie istnieje
 if ($userExist[0] == 0) {
         die ('<p>Przykro nam, taki użytkownik nie istnieje</p>');
-    }
-	
+    }	
 
-	
-	
 
-    
     
     // zapisanie danych usera do $id
     $profile = user::getDataById ($id);
@@ -35,7 +31,9 @@ if ($userExist[0] == 0) {
 		//zabezpieczenie przed przeglądaniem cudzych profili
 	    $user = user::getData('', '');
 if ($user['id'] != $profile['id']) { 
-		die('<p>Możesz przeglądać tylko swój profil!!!</p>');
+		session_destroy();
+		$_SESSION = array ();
+	
 }
     
     echo '<h1>Profil użytkownika '.$profile['login'].'</h1>';
@@ -61,6 +59,7 @@ if ($user['id'] != $profile['id']) {
 	//Co oznacza wynik bmi
 	$checkBmi = mybody::checkBmi($bmi);
 	echo '<b>'.$checkBmi.'</b> <br />';
+	
 	
 	
 	
