@@ -62,7 +62,6 @@ if ($user['id'] != $profile['id']) {
 	$checkBmi = mybody::checkBmi($bmi);
 	echo '<b>'.$checkBmi.'</b> <br />';
 	
-	echo $_SESSION['id'];
 	
 	
 	
