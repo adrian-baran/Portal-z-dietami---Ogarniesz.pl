@@ -19,14 +19,24 @@ else {
     $userExist = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM users WHERE id = '$id'"));
 
     // jezeli nie istnieje
-    if ($userExist[0] == 0) {
+if ($userExist[0] == 0) {
         die ('<p>Przykro nam, taki użytkownik nie istnieje</p>');
     }
+	
+
+	
+	
 
     
     
     // zapisanie danych usera do $id
     $profile = user::getDataById ($id);
+	
+		//zabezpieczenie przed przeglądaniem cudzych profili
+	    $user = user::getData('', '');
+if ($user['id'] != $profile['id']) { 
+		die('<p>Możesz przeglądać tylko swój profil!!!</p>');
+}
     
     echo '<h1>Profil użytkownika '.$profile['login'].'</h1>';
 
@@ -51,6 +61,10 @@ else {
 	//Co oznacza wynik bmi
 	$checkBmi = mybody::checkBmi($bmi);
 	echo '<b>'.$checkBmi.'</b> <br />';
+	
+	echo $_SESSION['id'];
+	
+	
 	
 	
 
